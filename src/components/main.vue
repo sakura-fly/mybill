@@ -2,7 +2,7 @@
   <div>
     <Row>
       <Col :sm="{ span: 8, offset: 8 }">
-        <Select v-model="formData.userid" style="width: 166px;" placeholder="选人">
+        <Select v-model="formData.userid" style="width: 166px;" placeholder="选人" @on-change="select" >
           <Option v-for="user in userList" :value="user.id" :key="user.id">{{ user.username }}</Option>
         </Select>
         <DatePicker type="daterange" placement="bottom-end" placeholder="选择日期" style="width: 166px"
@@ -45,7 +45,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.data + '111111111111111')
     this.getMsg()
     this.$axios.get('/api/user/list')
       .then((r) => {
@@ -59,6 +58,7 @@ export default {
     cldate (b) {
       this.formData.starttime = b[0]
       this.formData.endtime = b[1]
+      this.getMsg()
     },
     getMsg () {
       console.log('get msg')
@@ -69,6 +69,9 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
+    },
+    select () {
+      this.getMsg()
     }
   }
 }
