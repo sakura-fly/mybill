@@ -7,7 +7,8 @@
         </Select>
         <DatePicker type="daterange" placement="bottom-end" placeholder="选择日期" style="width: 166px"
                     @on-change="cldate" ></DatePicker>
-
+        <br>
+        <h3>总金额:{{allPrice}}</h3>
         <Table :columns="columns" :data="data"></Table>
       </Col>
     </Row>
@@ -40,7 +41,8 @@ export default {
         userid: '',
         starttime: '',
         endtime: ''
-      }
+      },
+      allPrice: ''
 
     }
   },
@@ -65,6 +67,13 @@ export default {
       this.$axios.get('/api/msg/list', {params: this.formData})
         .then((r) => {
           this.data = r.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$axios.get('/api/msg/allprice', {params: this.formData})
+        .then((r) => {
+          this.allPrice = r.data
         })
         .catch(function (error) {
           console.log(error)
