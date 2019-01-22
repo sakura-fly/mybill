@@ -2,11 +2,11 @@
   <div>
     <Row>
       <Col :sm="{ span: 8, offset: 8 }">
-        <Select v-model="seUser" style="width: 166px;">
+        <Select v-model="formData.userid" style="width: 166px;" placeholder="选人">
           <Option v-for="user in userList" :value="user.id" :key="user.id">{{ user.username }}</Option>
         </Select>
-        <DatePicker type="daterange" placement="bottom-end" placeholder="Select date" style="width: 166px"
-                    @on-change="cldate"></DatePicker>
+        <DatePicker type="daterange" placement="bottom-end" placeholder="选择日期" style="width: 166px"
+                    @on-change="cldate" ></DatePicker>
 
         <Table :columns="columns" :data="data"></Table>
       </Col>
@@ -36,20 +36,17 @@ export default {
       ],
       data: [],
       userList: [],
-      seUser: ''
+      formData: {
+        userid: '',
+        starttime: '',
+        endtime: ''
+      }
 
     }
   },
   mounted () {
     console.log(this.data + '111111111111111')
-
-    this.$axios.get('/api/msg/list')
-      .then((r) => {
-        this.data = r.data
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
+    this.getMsg()
     this.$axios.get('/api/user/list')
       .then((r) => {
         this.userList = r.data
@@ -60,7 +57,18 @@ export default {
   },
   methods: {
     cldate (b) {
-      console.log(b)
+      this.formData.starttime = b[0]
+      this.formData.endtime = b[1]
+    },
+    getMsg () {
+      console.log('get msg')
+      this.$axios.get('/api/msg/list', {params: this.formData})
+        .then((r) => {
+          this.data = r.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   }
 }
