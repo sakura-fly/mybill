@@ -1,7 +1,7 @@
 <template>
   <div>
     <Row>
-      <Col :sm="{ span: 8, offset: 8 }">
+      <Col :sm="{ span: 10, offset: 7 }">
         <Select v-model="formData.userid" style="width: 166px;" placeholder="选人" @on-change="select" >
           <Option v-for="user in userList" :value="user.id" :key="user.id">{{ user.username }}</Option>
         </Select>
