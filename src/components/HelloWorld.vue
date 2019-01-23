@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     login () {
-      this.$axios.post('/api/auth', this.data)
+      this.$axios.post('/api/auth', this.$qs.stringify(this.data))
         .then((r) => {
           if (r.data.code === 1 && r.data.model !== null) {
             this.$cookies.set('user', JSON.stringify(r.data.model))
