@@ -2,14 +2,34 @@
   <div>
     <Row>
       <Col :sm="{ span: 10, offset: 7 }">
-        <Select v-model="formData.userid" style="width: 166px;" placeholder="选人" @on-change="select" >
+        <Select v-model="formData.userid" style="width: 166px;" placeholder="选人" @on-change="select">
           <Option v-for="user in userList" :value="user.id" :key="user.id">{{ user.username }}</Option>
         </Select>
         <DatePicker type="daterange" placement="bottom-end" placeholder="选择日期" style="width: 166px"
-                    @on-change="cldate" ></DatePicker>
+                    @on-change="cldate"></DatePicker>
+        <Button type="primary" @click="tianModal = true">添加</Button>
         <br>
         <h3>总金额:{{allPrice}}</h3>
         <Table :columns="columns" :data="data"></Table>
+        <Modal
+          v-model="tianModal"
+          title="先这样吧"
+          @on-ok="sendMsg('msgData')">
+          <Form ref="msgData" :rules="rule" :model="msgData">
+            <FormItem prop="msg">
+              <Input clearable placeholder="物品信息" v-model="msgData.msg"/>
+            </FormItem>
+            <!--<br>-->
+            <!--<br>-->
+            <FormItem prop="price">
+              <Input  placeholder="价钱" v-model="msgData.price" />
+            </FormItem>
+          </Form>
+          <div slot="footer">
+            <Button type="text" size="large" @click="tianModal=false">取消</Button>
+            <Button type="primary" size="large" @click="sendMsg('msgData')">确定</Button>
+          </div>
+        </Modal>
       </Col>
     </Row>
   </div>
@@ -42,7 +62,26 @@ export default {
         starttime: '',
         endtime: ''
       },
-      allPrice: ''
+      msgData: {
+        msg: '',
+        price: ''
+      },
+      allPrice: '',
+      tianModal: false,
+      rule: {
+        msg: [
+          {required: true, message: '不能为空', trigger: 'blur'}
+        ],
+        price: [
+          { required: true, message: '不能为空', trigger: 'blur' },
+          { type: 'number',
+            message: '数字',
+            trigger: 'blur',
+            transform (value) {
+              return Number(value)
+            }}
+        ]
+      }
 
     }
   },
@@ -81,6 +120,17 @@ export default {
     },
     select () {
       this.getMsg()
+    },
+    sendMsg (name) {
+      // this.$Message.success(name)
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.$Message.success('Success!')
+        } else {
+          this.$Message.error('Fail!')
+          return false
+        }
+      })
     }
   }
 }
