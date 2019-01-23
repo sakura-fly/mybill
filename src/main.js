@@ -10,13 +10,14 @@ import 'iview/dist/styles/iview.css'
 import axios from 'axios'
 
 import VueCookies from 'vue-cookies'
-
+import qs from 'qs';
 
 
 Vue.use(VueCookies)
 
 Vue.use(iView)
 Vue.prototype.$axios = axios
+Vue.prototype.$qs = qs;
 // Vue.use(vueResource)
 
 Vue.config.productionTip = false

@@ -8,7 +8,14 @@
         <Input clearable placeholder="密码" type="password" v-model="data.pwd"/>
         <br>
         <br>
-        <Button long type="info" @click="login">ok</Button>
+        <div v-if="inLogin">
+          <Button long type="info" @click="login">登录</Button>
+        </div>
+        <div v-else>
+          <Button long type="info" @click="regist">注册</Button>
+        </div>
+        <br>
+        <a href="javascript:void(0)" @click="inLogin = !inLogin">换</a>
         <!--// eslint-disable-next-line-->
       </Col>
     </Row>
@@ -25,12 +32,22 @@ export default {
       data: {
         username: '',
         pwd: ''
-      }
+      },
+      inLogin: true
     }
   },
   methods: {
     login () {
       this.$axios.post('/api/auth', this.data)
+        .then(function (r) {
+          alert(r)
+        })
+        .catch(function (e) {
+          alert(e)
+        })
+    },
+    regist () {
+      this.$axios.post('/api/user', this.$qs.stringify(this.data))
         .then(function (r) {
           alert(r)
         })
