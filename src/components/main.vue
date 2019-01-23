@@ -87,7 +87,7 @@ export default {
   },
   mounted () {
     this.getMsg()
-    this.$axios.get('/api/user/list')
+    this.$axios.get('/bill/user/list')
       .then((r) => {
         this.userList = r.data
       })
@@ -103,14 +103,14 @@ export default {
     },
     getMsg () {
       console.log('get msg')
-      this.$axios.get('/api/msg/list', {params: this.formData})
+      this.$axios.get('/bill/msg/list', {params: this.formData})
         .then((r) => {
           this.data = r.data
         })
         .catch(function (error) {
           console.log(error)
         })
-      this.$axios.get('/api/msg/allprice', {params: this.formData})
+      this.$axios.get('/bill/msg/allprice', {params: this.formData})
         .then((r) => {
           this.allPrice = r.data
         })
@@ -125,8 +125,8 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           // this.$Message.success('Success!')
-          this.$cookies.get('user')
-          this.$axios.post('/api/msg', this.msgData)
+          // this.$cookies.get('user')
+          this.$axios.post('/bill/msg', this.msgData)
             .then((r) => {
               // this.allPrice = r.data
               alert(r)

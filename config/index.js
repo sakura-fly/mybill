@@ -11,12 +11,12 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
+      'bill': {
         target: 'http://192.168.1.21:8084',  //目标接口域名
         // target: 'http://www.clearsource.top',  //目标接口域名
         changeOrigin: true,  //是否跨域
         pathRewrite: {
-          '^/api': '/bill'   //重写接口
+          'bill': '/bill'   //重写接口
         }
       }
     },

@@ -38,10 +38,10 @@ export default {
   },
   methods: {
     login () {
-      this.$axios.post('/api/auth', this.$qs.stringify(this.data))
+      this.$axios.post('/bill/auth', this.$qs.stringify(this.data))
         .then((r) => {
           if (r.data.code === 1 && r.data.model !== null) {
-            this.$cookies.set('user', JSON.stringify(r.data.model))
+            // this.$cookies.set('user', JSON.stringify(r.data.model))
             alert('ok')
             // window.location.href = 'main'
             this.$router.push({path: '/main'})
@@ -54,10 +54,10 @@ export default {
         })
     },
     regist () {
-      this.$axios.post('/api/user', this.$qs.stringify(this.data))
+      this.$axios.post('/bill/user', this.$qs.stringify(this.data))
         .then(function (r) {
           if (r.data.code === 1 && r.data.model !== null) {
-            this.$cookies.set('user', JSON.stringify(r.data.model))
+            // this.$cookies.set('user', JSON.stringify(r.data.model))
             alert('ok')
             window.local.href = 'main'
           } else {
