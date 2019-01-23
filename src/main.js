@@ -13,11 +13,12 @@ import VueCookies from 'vue-cookies'
 import qs from 'qs';
 
 
-Vue.use(VueCookies)
+// Vue.use(VueCookies)
 
 Vue.use(iView)
 Vue.prototype.$axios = axios
-Vue.prototype.$qs = qs;
+Vue.prototype.$qs = qs
+Vue.prototype.$cookies = VueCookies
 // Vue.use(vueResource)
 
 Vue.config.productionTip = false
