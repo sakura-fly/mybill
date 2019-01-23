@@ -9,6 +9,12 @@ import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 import axios from 'axios'
 
+import VueCookies from 'vue-cookies'
+
+
+
+Vue.use(VueCookies)
+
 Vue.use(iView)
 Vue.prototype.$axios = axios
 // Vue.use(vueResource)

@@ -13,8 +13,7 @@
         <Table :columns="columns" :data="data"></Table>
         <Modal
           v-model="tianModal"
-          title="先这样吧"
-          @on-ok="sendMsg('msgData')">
+          title="先这样吧">
           <Form ref="msgData" :rules="rule" :model="msgData">
             <FormItem prop="msg">
               <Input clearable placeholder="物品信息" v-model="msgData.msg"/>
@@ -64,7 +63,8 @@ export default {
       },
       msgData: {
         msg: '',
-        price: ''
+        price: '',
+        userid: ''
       },
       allPrice: '',
       tianModal: false,
@@ -122,13 +122,21 @@ export default {
       this.getMsg()
     },
     sendMsg (name) {
-      // this.$Message.success(name)
       this.$refs[name].validate((valid) => {
         if (valid) {
-          this.$Message.success('Success!')
+          // this.$Message.success('Success!')
+          this.$cookies.get('user')
+          this.$axios.post('/api/msg', this.msgData)
+            .then((r) => {
+              // this.allPrice = r.data
+              alert(r)
+              this.tianModal=false
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
         } else {
-          this.$Message.error('Fail!')
-          return false
+          this.$Message.error('有填错的')
         }
       })
     }
