@@ -57,14 +57,14 @@ export default {
       data: [],
       userList: [],
       formData: {
-        userid: '',
+        userid: 0,
         starttime: '',
         endtime: ''
       },
       msgData: {
         msg: '',
         price: '',
-        userid: ''
+        // userid: ''
       },
       allPrice: '',
       tianModal: false,
@@ -89,7 +89,7 @@ export default {
     this.getMsg()
     this.$axios.get('/bill/user/list')
       .then((r) => {
-        this.userList = r.data
+        this.userList = r.data.data
       })
       .catch(function (error) {
         console.log(error)
@@ -126,11 +126,11 @@ export default {
         if (valid) {
           // this.$Message.success('Success!')
           // this.$cookies.get('user')
-          this.$axios.post('/bill/msg', this.msgData)
+          this.$axios.post('/bill/msg', this.$qs.stringify(this.msgData))
             .then((r) => {
               // this.allPrice = r.data
               alert(r)
-              this.tianModal=false
+              this.tianModal = false
             })
             .catch(function (error) {
               console.log(error)
