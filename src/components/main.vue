@@ -42,7 +42,12 @@ export default {
       columns: [
         {
           title: '是谁',
-          key: 'name'
+          key: 'username',
+          render: (h, params) => {
+            return h('div', [
+              params.row.user.username
+            ])
+          }
         }, {
           title: '啥时候',
           key: 'time'
@@ -105,7 +110,7 @@ export default {
       console.log('get msg')
       this.$axios.get('/bill/msg/list', {params: this.formData})
         .then((r) => {
-          this.data = r.data
+          this.data = r.data.data
         })
         .catch(function (error) {
           console.log(error)

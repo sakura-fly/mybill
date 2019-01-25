@@ -10,7 +10,7 @@ import 'iview/dist/styles/iview.css'
 import axios from 'axios'
 
 import VueCookies from 'vue-cookies'
-import qs from 'qs';
+import qs from 'qs'
 
 
 // Vue.use(VueCookies)
