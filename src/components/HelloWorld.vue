@@ -58,9 +58,10 @@ export default {
         .then(function (r) {
           if (r.data.code === 1 && r.data.model !== null) {
             // this.$cookies.set('user', JSON.stringify(r.data.model))
-            window.local.href = 'main'
+            // window.local.href = 'main'
+            alert('注册成功')
           } else {
-            alert('失败登录')
+            alert('注册失败')
           }
         })
         .catch(function (e) {
