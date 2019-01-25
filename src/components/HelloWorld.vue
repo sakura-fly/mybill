@@ -58,12 +58,10 @@ export default {
         .then(function (r) {
           if (r.data.code === 1 && r.data.model !== null) {
             // this.$cookies.set('user', JSON.stringify(r.data.model))
-            alert('ok')
             window.local.href = 'main'
           } else {
             alert('失败')
           }
-          alert('失败')
         })
         .catch(function (e) {
           alert('失败')
