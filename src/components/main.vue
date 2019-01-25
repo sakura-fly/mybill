@@ -92,7 +92,7 @@ export default {
   },
   mounted () {
     this.getMsg()
-    this.$axios.get('/bill/user/list')
+    this.$axios.get(process.env.API_HOST + '/user/list')
       .then((r) => {
         this.userList = r.data.data
       })
@@ -108,14 +108,14 @@ export default {
     },
     getMsg () {
       console.log('get msg')
-      this.$axios.get('/bill/msg/list', {params: this.formData})
+      this.$axios.get(process.env.API_HOST + '/msg/list', {params: this.formData})
         .then((r) => {
           this.data = r.data.data
         })
         .catch(function (error) {
           console.log(error)
         })
-      this.$axios.get('/bill/msg/allprice', {params: this.formData})
+      this.$axios.get(process.env.API_HOST + '/msg/allprice', {params: this.formData})
         .then((r) => {
           this.allPrice = r.data
         })
@@ -131,7 +131,7 @@ export default {
         if (valid) {
           // this.$Message.success('Success!')
           // this.$cookies.get('user')
-          this.$axios.post('/bill/msg', this.$qs.stringify(this.msgData))
+          this.$axios.post(process.env.API_HOST + '/msg', this.$qs.stringify(this.msgData))
             .then((r) => {
               // this.allPrice = r.data
               alert(r)

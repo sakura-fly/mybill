@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     login () {
-      this.$axios.post('/bill/auth', this.$qs.stringify(this.data))
+      this.$axios.post(process.env.API_HOST + '/auth', this.$qs.stringify(this.data))
         .then((r) => {
           if (r.data.code === 1 && r.data.model !== null) {
             // this.$cookies.set('user', JSON.stringify(r.data.model))
@@ -54,17 +54,18 @@ export default {
         })
     },
     regist () {
-      this.$axios.post('/bill/user', this.$qs.stringify(this.data))
+      this.$axios.post(process.env.API_HOST + '/user', this.$qs.stringify(this.data))
         .then(function (r) {
           if (r.data.code === 1 && r.data.model !== null) {
             // this.$cookies.set('user', JSON.stringify(r.data.model))
             window.local.href = 'main'
           } else {
-            alert('失败')
+            alert('失败登录')
           }
         })
         .catch(function (e) {
-          alert('失败')
+          console.log(e)
+          alert('网络失败')
         })
     }
   }

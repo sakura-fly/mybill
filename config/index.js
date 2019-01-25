@@ -12,8 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/bill': {
-        target: 'http://192.168.1.21:8084',  //目标接口域名
-        // target: 'http://www.clearsource.top',  //目标接口域名
+        // target: 'http://192.168.1.21:8084',  //目标接口域名
+        target: 'http://www.clearsource.top',  //目标接口域名
         changeOrigin: true,  //是否跨域
         pathRewrite: {
           '^/bill': '/bill'   //重写接口
@@ -59,13 +59,16 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
+    // assetsPublicPath: '/',
+
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
+    // productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
